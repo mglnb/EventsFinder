@@ -11,6 +11,7 @@ export const Tabs = TabNavigator({
 
         Category: {
             screen: Category,
+            screenProps: 'none',
             navigationOptions: {
                 tabBarLabel: "Categorias",
                 tabBarIcon: ({tintColor}) => (
@@ -20,6 +21,7 @@ export const Tabs = TabNavigator({
         },
         ListEvents: {
             screen: ListEvents,
+            screenProps: 'none',            
             navigationOptions: {
                 tabBarLabel: "Listar Eventos",
                 tabBarIcon: ({tintColor}) =>(
@@ -29,6 +31,7 @@ export const Tabs = TabNavigator({
         }
     },
     {
+        lazy: true,
         tabBarPosition: 'bottom',
         animationEnabled: true,
         tabBarComponent: TabBarBottom,
@@ -38,17 +41,17 @@ export const Tabs = TabNavigator({
             labelStyle: {
                 fontSize: 14,
             },
-            iconStyle: {
+            iconStyle: { 
                 height: 24,
                 width: 24,
             },
-            style: {
+            style: { 
                 height: 56,
                 backgroundColor: 'transparent',
             },
             activeTintColor: "black",
             inactiveTintColor: "#888888"
-        },
+        },  
     });
 
 

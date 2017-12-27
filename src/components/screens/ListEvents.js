@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, {
+    Component
+} from 'react';
 import {
     Text,
     View,
@@ -6,7 +8,7 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-} from 'react-native';
+} from 'react-native'; 
 import BoxEvents from '../sharedComponents/BoxEvents'
 import _ from 'lodash';
 import firebase from '../../plugins/firebase'
@@ -16,48 +18,58 @@ export default class ListEvents extends Component {
         super(props);
         this.state = {
             events: [],
-            filter: this.props.navigation.state.filter || ''
+            eventsFiltered: [],
+            filter: '',
+            haveFilter: false,
         };
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.ltron(this.state.filter)
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        if (nextProps.navigation.state.params.filter) {
+            let filtered = this.state.events.filter((value, index) => value.venue.categoryList.indexOf(nextProps.navigation.state.params.filter) > -1);
+            this.setState({
+                eventsFiltered: filtered,
+                haveFilter: true,
+            })
+        }
     }
-
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('should?', nextProps, nextState);
+        return true
+    }
     componentWillMount() {
-        firebase.database().ref("events/list")
-            .once("value")
-            .then(snapshot => {
-                this.setState({events: _.orderBy(snapshot.val(), 'startTime')});
-            });
-        const {filter} = this.state;
-        this.setState({
-            events: _.filter(this.state.events, (o) => o.venue.category !== state.params.filter)
-        });
+        console.log('mounted')
+        fetch('https://eventos-pelotas.firebaseio.com/events/list.json')
+            .then(response => response.json())
+            .then(response => this.setState({
+                events: _.orderBy(response, 'startTime')
+            }))
+        const {
+            filter
+        } = this.state;
     }
 
     componentDidMount() {
-        this.addListenerOn(this.props.filter, 'filter', this.miscFunction);
 
-    }
+    } 
 
     render() {
-        return (
-            <FlatList
-                data={this.state.events}
-                keyExtractor={(item, index) => item.id}
-                renderItem={({item}) => <BoxEvents value={item} key={item.id}/>}
-            />
-        );
+        let events = this.state.haveFilter ? this.state.eventsFiltered : this.state.events;        
+        if(events.length > 0) {
+            return (  
+                <FlatList data={this.state.haveFilter ? this.state.eventsFiltered : this.state.events}
+                    keyExtractor={(item, index) => item.id}
+                    renderItem={({ item }) => <BoxEvents value={item} key={item.id} />} />
+                );
+        }
+        return (<Text style={styles.textError}> Não há eventos com este filtro. </Text>)
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 8,
-        backgroundColor: '#ecf0f1',
-        paddingLeft: 5,
-        paddingRight: 15,
+    textError : {
+        fontSize: 20,
+        alignSelf: 'center',
     }
 });

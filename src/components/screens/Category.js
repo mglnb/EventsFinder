@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, TouchableOpacity} from 'react-native'
+import {Text, View, FlatList, TouchableOpacity, StyleSheet} from 'react-native'
 import firebase from '../../plugins/firebase'
 import BoxCategory from '../sharedComponents/BoxCategory'
 import { NavigationActions } from 'react-navigation'
@@ -14,39 +14,36 @@ export default class Category extends Component {
     }
 
     componentWillMount() {
-        firebase.database().ref("events/categories")
-            .once("value")
-            .then(snapshot => {
-                this.setState({categories: Object.values(snapshot.val())});
-            });
+        fetch('https://eventos-pelotas.firebaseio.com/events/categories.json')
+            .then(response => response.json())
+            .then(response => this.setState({categories: Object.values(response)})) 
         this.eventEmitter = new EventEmitter();
 
-    }
-
-    sendProps(prop) {
-        this.eventEmitter.emit('filter', { filter: prop });
-
-        const navigateAction = NavigationActions.navigate({
-            routeName: 'ListEvents',
-            params: {filter: prop},
-            action: NavigationActions.navigate({ routeName: 'ListEvents'})
-        });
-        return this.props.navigation.dispatch(navigateAction)
     }
     render() {
         const {navigate} = this.props.navigation;
         return (
             <FlatList
-                data={this.state.categories}
+                data={this.state.categories} 
                 keyExtractor={(item, index) => index}
-                renderItem={({item}) => (
-                    <TouchableOpacity
-                        onPress={() => this.sendProps(item)}>
-                        <BoxCategory value={item}/>
-                    </TouchableOpacity>
+                numColumns={2} 
+                renderItem={({item}) => ( 
+                    <TouchableOpacity  
+                        style={styles.touchableBox}
+                        onPress={() => navigate("ListEvents", {filter: item})}>
+                        <BoxCategory pointerEvents='box-only' value={item}/> 
+                    </TouchableOpacity>   
                     )
                 }
             />
         )
     }
-}
+} 
+
+const styles = StyleSheet.create({
+   touchableBox: {
+       flex: 1,
+       alignItems: 'center',
+       justifyContent: 'center',
+   }
+}); 

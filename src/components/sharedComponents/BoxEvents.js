@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     eventPicture: {
         alignSelf: 'stretch',
         height: 120,
-
     },
     boxEvent: {
         flexWrap: 'nowrap',

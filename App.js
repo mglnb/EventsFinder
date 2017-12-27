@@ -1,35 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, {Component} from 'react';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
-import Main from './src/components/';
+import Main from './src/components/screens/ListEvents';
 import './src/plugins/reactotron'
-// import Reactotron from 'reactotron-react-native'
+import { Tabs } from "./src/plugins/router";
+
 export default class App extends Component<{}> {
     constructor() {
-        super()
+        super();
         console.ignoredYellowBox = ['Setting a timer'];
     }
 
-    componentDidMount() {
-        // console.tron = Reactotron
-        //     .configure()
-        //     .useReactNative()
-        //     .connect()
-    }
 
     render() {
         return (
-            <Main> </Main>
+            <Tabs> </Tabs>
         );
     }
 }

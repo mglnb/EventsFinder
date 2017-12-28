@@ -35,10 +35,6 @@ export default class ListEvents extends Component {
             })
         }
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('should?', nextProps, nextState);
-        return true
-    }
     componentWillMount() {
         this.setState({ isLoading: true })
         console.log('mounted')
@@ -48,12 +44,22 @@ export default class ListEvents extends Component {
                 events: _.orderBy(response, 'startTime'),
                 isLoading: false
             }))
-        const {
-            filter
-        } = this.state;
-    }
+            .then(() => { 
+                let haveFilter = this.props.navigation.state && this.props.navigation.state.params && this.props.navigation.state.params.filter || null
+                if (haveFilter)   {
+                    let filtered = this.state.events.filter((value, index) => value.venue.categoryList.indexOf(this.props.navigation.state.params.filter) > -1);
+                    this.setState({ 
+                        eventsFiltered: filtered,
+                        haveFilter: true,
+                    })
+                }
+            })
+            .catch(e => console.error(e))
 
-    isLoading() {
+
+    }
+ 
+    isLoading() { 
         return this.state.isLoading ? <ActivityIndicator size="large" style={styles.activity} color="#0000ff" /> : undefined
     }
 
@@ -74,7 +80,7 @@ export default class ListEvents extends Component {
         return (<Text style={styles.textError}> Não há eventos com este filtro, tente novamente mais tarde. :(</Text>)
     }
 }
-   
+
 const styles = StyleSheet.create({
     textError: {
         fontSize: 24,
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         alignItems: 'stretch',
-        justifyContent: 'center' 
+        justifyContent: 'center'
     },
     activity: {
         flex: 1,

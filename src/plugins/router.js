@@ -24,19 +24,38 @@ const MainTab = StackNavigator({
             }
         },
     },
-});
- 
+},
+    {
+        navigationOptions: {
+            headerTitleStyle: {
+                color: "white"
+            },
+            headerStyle: {
+                backgroundColor: "#5480F3"
+            }
+        }
+    });
+
 const ListTab = StackNavigator({
     ListEventsNotFilter: {
         screen: ListEvents,
         navigationOptions: ({ navigation }) => {
             let title = navigation && navigation.state && navigation.state.params && navigation.state.params.filter || "Lista de Eventos"
-            return { 
+            return {
                 title: `Lista de Eventos`,
             }
         },
     },
-});
+}, {
+        navigationOptions: {
+            headerTitleStyle: {
+                color: "white"
+            },
+            headerStyle: {
+                backgroundColor: "#5480F3"
+            }
+        }
+    });
 
 export const Tabs = TabNavigator({
     TabCategory: {
@@ -75,7 +94,7 @@ export const Tabs = TabNavigator({
         animationEnabled: true,
         tabBarComponent: TabBarBottom,
         tabBarOptions: {
-            showLabel: true, 
+            showLabel: true,
             showIcon: true,
             labelStyle: {
                 fontSize: 12,
@@ -88,8 +107,8 @@ export const Tabs = TabNavigator({
                 height: 56,
                 backgroundColor: 'transparent',
             },
-            activeTintColor: "black",
-            inactiveTintColor: "#888888"
+            activeTintColor: "#5480F3",
+            inactiveTintColor: "black"
         },
     });
 

@@ -9,7 +9,8 @@ export default class Category extends Component {
         super(props);
         this.state = {
             categories: [],
-            isLoading: false
+            isLoading: false,
+            textColor: "black"
         }
     }
 
@@ -31,7 +32,6 @@ export default class Category extends Component {
                     <FlatList
                         data={this.state.categories}
                         keyExtractor={(item, index) => index}
-                        numColumns={2}
                         style={{ marginBottom: 0 }}
                         renderItem={
                             ({ item }) => (
@@ -43,8 +43,10 @@ export default class Category extends Component {
                                 >
                                     <TouchableOpacity
                                         style={styles.touchableBox}
-                                        onPress={() => navigate("ListEvents", { filter: item })}>
-                                        <BoxCategory pointerEvents='box-only' value={item} />
+                                        onPress={() => {
+                                            navigate("ListEvents", { filter: item })
+                                            }}>
+                                        <BoxCategory pointerEvents='box-only' color={this.state.textColor} value={item} />
                                     </TouchableOpacity>
                                 </LinearGradient>
                             )
@@ -58,8 +60,8 @@ const styles = StyleSheet.create({
     touchableBox: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#fff', 
-        margin:2,
+        backgroundColor: '#ffffff',
+        margin: 1,
         borderRadius: 80,
     },
     linearGradient: {

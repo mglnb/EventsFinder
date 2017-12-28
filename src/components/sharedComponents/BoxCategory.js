@@ -6,13 +6,13 @@ export default class BoxCategory extends Component {
         super(props);
     }
 
-    render() {
+    render() { 
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{this.props.value}</Text>
+            <View style={styles.container}> 
+                <Text style={[styles.text, {color : this.props.color}]}>{this.props.value}</Text>
             </View>
         )
-    }
+    } 
 }
 
 const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     text: {
-        color: "#444",
+        
         textAlign: 'center',
     }
 

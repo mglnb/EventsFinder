@@ -8,18 +8,19 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-} from 'react-native'; 
+    ActivityIndicator
+} from 'react-native';
 import BoxEvents from '../sharedComponents/BoxEvents'
 import _ from 'lodash';
 import firebase from '../../plugins/firebase'
-
 export default class ListEvents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            events: [],
+            events: ['1'],
             eventsFiltered: [],
             filter: '',
+            isLoading: false,
             haveFilter: false,
         };
     }
@@ -39,37 +40,53 @@ export default class ListEvents extends Component {
         return true
     }
     componentWillMount() {
+        this.setState({ isLoading: true })
         console.log('mounted')
         fetch('https://eventos-pelotas.firebaseio.com/events/list.json')
             .then(response => response.json())
             .then(response => this.setState({
-                events: _.orderBy(response, 'startTime')
+                events: _.orderBy(response, 'startTime'),
+                isLoading: false
             }))
         const {
             filter
         } = this.state;
     }
 
-    componentDidMount() {
-
-    } 
+    isLoading() {
+        return this.state.isLoading ? <ActivityIndicator size="large" style={styles.activity} color="#0000ff" /> : undefined
+    }
 
     render() {
-        let events = this.state.haveFilter ? this.state.eventsFiltered : this.state.events;        
-        if(events.length > 0) {
-            return (  
-                <FlatList data={this.state.haveFilter ? this.state.eventsFiltered : this.state.events}
-                    keyExtractor={(item, index) => item.id}
-                    renderItem={({ item }) => <BoxEvents value={item} key={item.id} />} />
+        let events = this.state.haveFilter ? this.state.eventsFiltered : this.state.events;
+        if (events.length > 0) {
+            if (!this.isLoading()) {
+                return (
+                    <View>
+                        <FlatList data={this.state.haveFilter ? this.state.eventsFiltered : this.state.events}
+                            keyExtractor={(item, index) => item.id}
+                            renderItem={({ item }) => <BoxEvents value={item} key={item.id} />} />
+                    </View>
                 );
+            }
+            return this.isLoading()
         }
-        return (<Text style={styles.textError}> Não há eventos com este filtro. </Text>)
+        return (<Text style={styles.textError}> Não há eventos com este filtro, tente novamente mais tarde. :(</Text>)
     }
 }
-
+   
 const styles = StyleSheet.create({
-    textError : {
-        fontSize: 20,
-        alignSelf: 'center',
+    textError: {
+        fontSize: 24,
+        flex: 1,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        alignItems: 'stretch',
+        justifyContent: 'center' 
+    },
+    activity: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TabBarBottom, TabNavigator} from 'react-navigation';
+import {TabBarBottom, TabNavigator, StackNavigator} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 import {StyleSheet, View} from 'react-native';
 
@@ -8,14 +8,13 @@ import ListEvents from '../components/screens/ListEvents';
 
 
 export const Tabs = TabNavigator({
-
         Category: {
             screen: Category,
             screenProps: 'none',
             navigationOptions: {
                 tabBarLabel: "Categorias",
                 tabBarIcon: ({tintColor}) => (
-                    <Icon name="sort" color={tintColor}/>
+                    <Icon name="filter-list" color={tintColor}/>
                 ),
             }
         },
@@ -25,7 +24,27 @@ export const Tabs = TabNavigator({
             navigationOptions: {
                 tabBarLabel: "Listar Eventos",
                 tabBarIcon: ({tintColor}) =>(
-                        <Icon name="view-list" color={tintColor}/>
+                        <Icon name="format-list-bulleted" color={tintColor}/>
+                )
+            }
+        },
+        Profile: {
+            screen: ListEvents,
+            screenProps: 'none',            
+            navigationOptions: {
+                tabBarLabel: "Perfil",
+                tabBarIcon: ({tintColor}) =>(
+                        <Icon name="perm-identity" color={tintColor}/>
+                )
+            }
+        },
+        Config: {
+            screen: ListEvents,
+            screenProps: 'none',            
+            navigationOptions: {
+                tabBarLabel: "Configurações",
+                tabBarIcon: ({tintColor}) =>(
+                        <Icon name="settings" color={tintColor}/>
                 )
             }
         }
@@ -36,10 +55,10 @@ export const Tabs = TabNavigator({
         animationEnabled: true,
         tabBarComponent: TabBarBottom,
         tabBarOptions: {
-            showLabel: true,
+            showLabel: false,
             showIcon: true,
             labelStyle: {
-                fontSize: 14,
+                fontSize: 12,
             },
             iconStyle: { 
                 height: 24,

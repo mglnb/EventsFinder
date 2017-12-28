@@ -28,11 +28,13 @@ const MainTab = StackNavigator({
     {
         navigationOptions: {
             headerTitleStyle: {
-                color: "white"
+                color: "white",
             },
             headerStyle: {
                 backgroundColor: "#5480F3"
-            }
+            },
+            headerTintColor: "white"
+            
         }
     });
 
@@ -53,7 +55,8 @@ const ListTab = StackNavigator({
             },
             headerStyle: {
                 backgroundColor: "#5480F3"
-            }
+            },
+            headerTintColor: "white"
         }
     });
 

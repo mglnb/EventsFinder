@@ -10,7 +10,7 @@ export default class Category extends Component {
         this.state = {
             categories: [],
             isLoading: false,
-            textColor: "black"
+            textColor: "white"
         }
     }
 
@@ -33,6 +33,7 @@ export default class Category extends Component {
                         data={this.state.categories}
                         keyExtractor={(item, index) => index}
                         style={{ marginBottom: 0 }}
+                        numColumns={2}
                         renderItem={
                             ({ item }) => (
                                 <LinearGradient
@@ -45,7 +46,7 @@ export default class Category extends Component {
                                         style={styles.touchableBox}
                                         onPress={() => {
                                             navigate("ListEvents", { filter: item })
-                                            }}>
+                                        }}>
                                         <BoxCategory pointerEvents='box-only' color={this.state.textColor} value={item} />
                                     </TouchableOpacity>
                                 </LinearGradient>
@@ -60,14 +61,17 @@ const styles = StyleSheet.create({
     touchableBox: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        margin: 1,
-        borderRadius: 80,
+        // backgroundColor: '#ffffff',
+        margin: 2,
+        borderTopLeftRadius: 15,
+        borderBottomRightRadius: 15,
     },
     linearGradient: {
-        margin: 10,
+        margin: 6 ,
         flex: 1,
-        borderRadius: 80,
+        borderTopLeftRadius: 15,
+        borderBottomRightRadius: 15,
+
     },
     activity: {
         flex: 1,

@@ -18,7 +18,7 @@ export default class BoxCategory extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 40,
+        height: 30,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 5,

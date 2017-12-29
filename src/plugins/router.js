@@ -1,10 +1,11 @@
 import React from 'react';
 import { TabBarBottom, TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 import Category from '../components/screens/Category';
 import ListEvents from '../components/screens/ListEvents';
+import Event from '../components/screens/Event';
 
 const MainTab = StackNavigator({
     Category: {
@@ -12,6 +13,7 @@ const MainTab = StackNavigator({
         path: '/',
         navigationOptions: {
             title: 'Categorias',
+
         },
     },
     ListEvents: {
@@ -24,6 +26,7 @@ const MainTab = StackNavigator({
             }
         },
     },
+
 },
     {
         navigationOptions: {
@@ -31,10 +34,11 @@ const MainTab = StackNavigator({
                 color: "white",
             },
             headerStyle: {
-                backgroundColor: "#5480F3"
+                backgroundColor: "#5480F3",
+                // marginTop: 20
             },
             headerTintColor: "white"
-            
+
         }
     });
 
@@ -47,14 +51,23 @@ const ListTab = StackNavigator({
                 title: `Lista de Eventos`,
             }
         },
-    },
+    }, Events: {
+        screen: Event,
+        path: '/event',
+        navigationOptions: ({ navigation }) => {
+            return {
+                title: "Evento",
+            }
+        },
+    }
 }, {
         navigationOptions: {
             headerTitleStyle: {
                 color: "white"
-            },
+            }, 
             headerStyle: {
-                backgroundColor: "#5480F3"
+                backgroundColor: "#5480F3",
+                // marginTop: 20 
             },
             headerTintColor: "white"
         }

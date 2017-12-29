@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     touchableBox: {
         flex: 1,
         alignItems: 'center',
-        // backgroundColor: '#ffffff',
         margin: 2,
         borderTopLeftRadius: 15,
         borderBottomRightRadius: 15,

@@ -1,15 +1,5 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Text,
-    View,
-    StyleSheet,
-    Image,
-    FlatList,
-    TouchableOpacity,
-    ActivityIndicator
-} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import BoxEvents from '../sharedComponents/BoxEvents'
 import _ from 'lodash';
 import firebase from '../../plugins/firebase'
@@ -26,7 +16,7 @@ export default class ListEvents extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
+        console.tlog(nextProps)
         if (nextProps.navigation.state.params.filter) {
             let filtered = this.state.events.filter((value, index) => value.venue.categoryList.indexOf(nextProps.navigation.state.params.filter) > -1);
             this.setState({
@@ -37,18 +27,18 @@ export default class ListEvents extends Component {
     }
     componentWillMount() {
         this.setState({ isLoading: true })
-        console.log('mounted')
+        console.tlog('mounted')
         fetch('https://eventos-pelotas.firebaseio.com/events/list.json')
             .then(response => response.json())
             .then(response => this.setState({
                 events: _.orderBy(response, 'startTime'),
                 isLoading: false
             }))
-            .then(() => { 
+            .then(() => {
                 let haveFilter = this.props.navigation.state && this.props.navigation.state.params && this.props.navigation.state.params.filter || null
-                if (haveFilter)   {
+                if (haveFilter) {
                     let filtered = this.state.events.filter((value, index) => value.venue.categoryList.indexOf(this.props.navigation.state.params.filter) > -1);
-                    this.setState({ 
+                    this.setState({
                         eventsFiltered: filtered,
                         haveFilter: true,
                     })
@@ -58,21 +48,22 @@ export default class ListEvents extends Component {
 
 
     }
- 
-    isLoading() { 
+
+    isLoading() {
         return this.state.isLoading ? <ActivityIndicator size="large" style={styles.activity} color="#0000ff" /> : undefined
     }
 
     render() {
+        let {navigate} = this.props.navigation
         let events = this.state.haveFilter ? this.state.eventsFiltered : this.state.events;
         if (events.length > 0) {
             if (!this.isLoading()) {
                 return (
                     <View>
                         <FlatList data={this.state.haveFilter ? this.state.eventsFiltered : this.state.events}
-                            keyExtractor={(item, index) => item.id}
-                            renderItem={({ item }) => <BoxEvents value={item} key={item.id} />} />
-                    </View>
+                            keyExtractor={(item, index) => item.id} 
+                            renderItem={({ item }) => <BoxEvents navigation={this.props.navigation} value={item} key={item.id} />} />
+                    </View> 
                 );
             }
             return this.isLoading()

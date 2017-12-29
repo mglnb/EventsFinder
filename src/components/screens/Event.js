@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
-import {Text} from 'react-native'
+import React, { Component } from 'react';
+import { Text } from 'react-native'
+import ScrollableHeader from '../Event/ScrollableHeader'
 export default class Event extends Component {
-    state = {  }
+    static navigationOptions = {
+        headerStyle: { height: 0 }
+    }
+    state = {}
     render() {
         return (
-            <Text> TODO </Text>
+            <ScrollableHeader event={this.props.navigation.state.params.event}/> 
         );
     }
 }

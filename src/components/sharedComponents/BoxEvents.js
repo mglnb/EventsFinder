@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
@@ -9,17 +9,21 @@ import {
 } from 'react-native';
 
 export default class BoxEvents extends Component {
+    constructor(props) {
+        super(props)
+    }
     render() {
         let time = this.props.value.startTime + '';
         let date = time.split('T')[0].split('-').reverse().join('/');
         let hour = time.split('T')[1] + '';
-        return (
-            <TouchableOpacity activeOpacity={0.5} key={this.props.value.id}>
+        let { navigate } = this.props.navigation
+        return (   
+            <TouchableOpacity onPress={() => navigate("Events", {event: this.props.value})} activeOpacity={0.5} key={this.props.value.id}>
 
                 <View style={styles.boxEvent}>
                     <Image
                         style={styles.eventPicture}
-                        source={{uri: this.props.value.coverPicture}}
+                        source={{ uri: this.props.value.coverPicture }}
                     />
                     <View style={styles.event}>
                         <Text style={styles.title}>{this.props.value.name.toUpperCase()}</Text>
@@ -28,7 +32,7 @@ export default class BoxEvents extends Component {
                                 {this.props.value.place && this.props.value.place.name}
                             </Text>
                             <Text style={styles.time}>
-                                {date} {hour.split('-')[0].substring(0,5)}
+                                {date} {hour.split('-')[0].substring(0, 5)}
                             </Text>
                         </View>
                     </View>

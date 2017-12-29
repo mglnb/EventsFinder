@@ -9,4 +9,4 @@ console.tron = Reactotron
     .connect(); // let's connect!
 
 
-console.ltron = console.tron.log;
+console.tlog = console.tron.log;

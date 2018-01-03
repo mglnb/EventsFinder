@@ -1,5 +1,5 @@
 /* global fetch */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native'
 import BoxEvents from '../sharedComponents/BoxEvents'
 import _ from 'lodash'
@@ -8,7 +8,7 @@ export default class ListEvents extends Component {
     super(props)
     this.state = {
       events: ['1'],
-      eventsFiltered: [],
+      eventsFiltered: [], 
       filter: '',
       isLoading: false,
       haveFilter: false

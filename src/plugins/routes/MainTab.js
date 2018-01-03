@@ -1,5 +1,5 @@
-import Category from '../components/screens/Category'
-import ListEvents from '../components/screens/ListEvents'
+import Category from '../../components/screens/Category'
+import ListEvents from '../../components/screens/ListEvents'
 
 export const MainTabStack = {
   Category: {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { TabBarBottom, TabNavigator, StackNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import ListEvents from '../components/screens/ListEvents'

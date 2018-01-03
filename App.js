@@ -1,5 +1,5 @@
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 import './src/plugins/reactotron'
 import { Tabs } from './src/plugins/router'
 import { StatusBar } from 'react-native'

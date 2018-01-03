@@ -1,5 +1,5 @@
 /* global fetch */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { View, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
 import BoxCategory from '../sharedComponents/BoxCategory'
 import LinearGradient from 'react-native-linear-gradient'

@@ -1,5 +1,5 @@
-import ListEvents from '../components/screens/ListEvents'
-import Event from '../components/screens/Event'
+import ListEvents from '../../components/screens/ListEvents'
+import Event from '../../components/screens/Event'
 
 export const ListTabStack = {
   ListEventsNotFilter: {

@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { Animated, Platform, StyleSheet, Text, View } from 'react-native'
 import Body from './Body'
 const HEADER_MAX_HEIGHT = 300

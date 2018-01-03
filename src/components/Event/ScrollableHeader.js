@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Animated, Platform, StyleSheet, Text, View } from 'react-native'
 import Body from './Body'
+import { Icon } from 'react-native-elements';
+import Touchable from '../sharedComponents/Touchable'
 const HEADER_MAX_HEIGHT = 300
-const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 40 : 53
+const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 40 : 56
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
 export default class ScrollableHeader extends Component {
@@ -57,6 +59,15 @@ export default class ScrollableHeader extends Component {
 
     return (
       <View style={styles.fill}>
+        <View style={styles.buttonBack}>
+          <Touchable
+            style={styles.buttonBackContainer}
+            onPress={() => { this.props.navigation.goBack() }}
+          >
+            <Icon name={'arrow-back'} color="#fff" size={24} />
+          </Touchable>
+        </View>
+
         <Animated.ScrollView
           style={styles.fill}
           scrollEventThrottle={1}
@@ -73,6 +84,7 @@ export default class ScrollableHeader extends Component {
             { transform: [{ translateY: headerTranslate }] }
           ]}
         >
+
           <Animated.Image
             style={[
               styles.backgroundImage,
@@ -96,7 +108,7 @@ export default class ScrollableHeader extends Component {
             }
           ]}
         >
-          <Text style={styles.title}>{this.props.event.name}</Text>
+          <Text style={styles.title}>{this.props.event.name.length > 33 ? this.props.event.name.substr(0, 34) + '...' : this.props.event.name}</Text>
         </Animated.View>
       </View>
     )
@@ -104,6 +116,11 @@ export default class ScrollableHeader extends Component {
 }
 
 const styles = StyleSheet.create({
+  buttonBackContainer: {
+    width: 50,
+    height: 50,
+    paddingTop: 15,
+  },
   fill: {
     flex: 1
   },
@@ -158,5 +175,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3D3D3',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  buttonBack: {
+    alignSelf: 'flex-start',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 9999
+  },
 })

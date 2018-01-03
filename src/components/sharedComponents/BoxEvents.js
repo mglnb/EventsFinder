@@ -1,13 +1,13 @@
 import React from 'react'
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
-
+import { Text, View, StyleSheet, Image } from 'react-native'
+import Touchable from '../sharedComponents/Touchable'
 const BoxEvent = (props) => {
   let time = props.value.startTime + ''
   let date = time.split('T')[0].split('-').reverse().join('/')
   let hour = time.split('T')[1] + ''
   let { navigate } = props.navigation
   return (
-    <TouchableOpacity onPress={() => navigate('Events', { event: props.value })} activeOpacity={0.5} key={props.value.id}>
+    <Touchable onPress={() => navigate('Events', { event: props.value })} activeOpacity={0.5} key={props.value.id}>
 
       <View style={styles.boxEvent}>
         <Image
@@ -26,7 +26,7 @@ const BoxEvent = (props) => {
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Touchable>
   )
 }
 const styles = StyleSheet.create({

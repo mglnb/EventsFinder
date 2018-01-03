@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 import ScrollableHeader from '../Event/ScrollableHeader'
+import { Icon } from 'react-native-elements';
 export default class Event extends Component {
     static navigationOptions = {
         headerStyle: { height: 0 }
     }
+
     state = {}
     render () {
         return (
-            <ScrollableHeader event={this.props.navigation.state.params.event} />
+            <ScrollableHeader 
+                navigation={this.props.navigation}
+                event={this.props.navigation.state.params.event}  />
         );
     }
 }
+

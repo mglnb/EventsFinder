@@ -6,9 +6,9 @@ export default class Event extends Component {
         headerStyle: { height: 0 }
     }
     state = {}
-    render() {
+    render () {
         return (
-            <ScrollableHeader event={this.props.navigation.state.params.event}/> 
+            <ScrollableHeader event={this.props.navigation.state.params.event} />
         );
     }
 }

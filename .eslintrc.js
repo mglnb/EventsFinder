@@ -6,7 +6,8 @@ module.exports = {
   ],
   rules: {
     "react/jsx-uses-vars": 2,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-console" : 0
   },
   plugins: ["eslint-plugin-react"]
 };

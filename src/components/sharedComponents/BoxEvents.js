@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
-export default (props) => {
+const BoxEvent = (props) => {
   let time = props.value.startTime + ''
   let date = time.split('T')[0].split('-').reverse().join('/')
   let hour = time.split('T')[1] + ''
@@ -70,3 +70,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   }
 })
+
+export default BoxEvent

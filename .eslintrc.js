@@ -1,7 +1,12 @@
 module.exports = {
-  extends: "standard",
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   rules: {
-    "react/jsx-uses-vars": 2
+    "react/jsx-uses-vars": 2,
+    "react/prop-types": 0
   },
   plugins: ["eslint-plugin-react"]
 };

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-export default (props) => (
+const BoxCategory = (props) => (
   <View style={styles.container}>
     <Text style={[styles.text, { color: props.color }]}>{props.value}</Text>
   </View>
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
+
+export default BoxCategory

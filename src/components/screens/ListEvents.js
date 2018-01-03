@@ -35,6 +35,11 @@ export default class ListEvents extends Component {
         isLoading: false
       }))
       .then(() => {
+        this.setState({
+          events: this.state.events.filter((value,index) => new Date(value.startTime)) > new Date()
+        })
+      })
+      .then(() => {
         let haveFilter = this.props.navigation.state && this.props.navigation.state.params && this.props.navigation.state.params.filter || null
         if (haveFilter) {
           let filtered = this.state.events.filter((value, index) => value.venue.categoryList.indexOf(this.props.navigation.state.params.filter) > -1)
